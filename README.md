@@ -1,1 +1,7 @@
-# web-dev-in-class
+ ![image](https://user-images.githubusercontent.com/110684003/216217800-b6a5f38b-17cb-4e78-b46f-51eed33affc5.png)
+
+Hi there, my name is Bryan De Anda and my undergraduate major is in Computer Science. In terms of my computer knowledge, I’d say I am fairly knowledgeable. I have personally worked with desktop computers and their parts physically. I have also taken Operating Systems which we covered in depth the components of a computer and how they work together to fulfill their objectives. So far I have taken the necessary computer science classes that are part of my major that includes computer science one to three, assembly language, and others. I have written a couple of programs, some of which are small and some that were necessary for class. For these programs I have mainly worked with Java and creating a responsive Java GUI program. I have yet to collaborate with anyone on a project but I expect that to change this semester.
+
+I did not only take this class for the requirement that would be met in my degree plan. I am fully interested in the subject and I plan to absorb as much as I can. I intend to absorb, retain and even overeducate myself in this field because I believe that I would like to be part in this field in my future career. I don’t simply plan on taking the information from this class to build a small foundation for the concepts used but I plan on hopefully taking what I learn and using it in the future.
+
+I believe this is already something that will occur in class but I have always understood new material better when it was presented with step-by-step examples. I believe every step of anything is important for capturing the full and complete picture of a subject.
