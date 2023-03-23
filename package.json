@@ -8,11 +8,15 @@
     "url": "git+https://github.com/DeAndaBryan/web-dev-in-class.git"
   },
   "private":"true",
+  "workspaces": [
+    "client"
+  ],
   "scripts": {
     "start": "node server/index.js",
     "dev": "nodemon server/index.js --watch server"
   },
   "dependencies": {
+    "build": "npm i -ws && npm run build -ws",
     "express": "^4.18.2"
   },
   "devDependencies": {
