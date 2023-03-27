@@ -1,35 +1,41 @@
 const data = require('../data/products.json');
 
 function getProducts() {
-    return data.products;
+  return data.products;
 }
+
 function getProductById(id) {
-    return data.products.find(p => p.id === id);
+    return data.products.find(product => product.id === id);
 }
 
 function addProduct(product) {
     product.id = data.products.length + 1;
     data.products.push(product);
 }
+
 function updateProduct(product) {
     const index = data.products.findIndex(p => p.id === product.id);
     data.products[index] = product;
 }
+
 function deleteProduct(id) {
     const index = data.products.findIndex(p => p.id === id);
     data.products.splice(index, 1);
 }
-function searchProducts(search) {
+
+function searchProducts(searchTerm) {
     return data.products.filter(product => {
-        return product.name.toLowerCase().includes(search.toLowerCase() => {
-            return product.name.toLowerCase().includes(search.toLowerCase());
-        });
-    }}
+        return  product.title.toLowerCase().includes(searchTerm.toLowerCase())  ||
+            product.description.toLowerCase().includes(searchTerm.toLowerCase())  ||
+            product.brand.toLowerCase().includes(searchTerm.toLowerCase());
+    });
+}
 
 module.exports = {
+    getProducts,
+    getProductById,
     addProduct,
     updateProduct,
     deleteProduct,
-    getProducts,
-    getProductById
+    searchProducts
 };
