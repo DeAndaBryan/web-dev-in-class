@@ -1,5 +1,6 @@
 const express = require('express')
-const path = require('path')
+const path = require('path');
+const jokes = require('./controllers/jokes');
 const products = require('./controllers/products')
 const app = express()
 
@@ -18,6 +19,7 @@ app
         res.send('Hello World! From Express')
     })
     .use('/api/v1/products', products)
+    .use('/api/v1/jokes', jokes)
 
 // Catch all
 app.get('*', (req, res) => {
@@ -25,7 +27,10 @@ app.get('*', (req, res) => {
 })
 
 
+console.log('1: About to start server')
 
 app.listen(port, () => 
-  console.log(`Server running at http://${hostname}:${port}/`)
+  console.log(`2: Server running at http://${hostname}:${port}/`)
 );
+
+console.log('3: Asked server to start')
