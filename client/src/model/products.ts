@@ -2,6 +2,7 @@
 */
 
 import data from "../data/products.json";
+import { api } from "./myFetch";
 
 export interface Product {
     id: number;
@@ -18,5 +19,9 @@ export interface Product {
 }
 
 export function getProducts(): Product[] {
+
+    api('products').then(res => {
+        console.log(res);
+    });
     return data.products;
 }
