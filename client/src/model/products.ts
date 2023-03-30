@@ -1,7 +1,6 @@
 /*  B"H
 */
 
-import data from "../data/products.json";
 import { api } from "./myFetch";
 
 export interface Product {
@@ -18,10 +17,7 @@ export interface Product {
     images: string[];
 }
 
-export function getProducts(): Product[] {
+export function getProducts(): Promise<Product[]> {
 
-    api('products').then(res => {
-        console.log(res);
-    });
-    return data.products;
+    return api('products')
 }

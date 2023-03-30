@@ -3,8 +3,10 @@ import { ref } from 'vue';
 import { getProducts, type Product } from '../model/products'
 import { addToCart } from '../model/cart';
 
-const products = ref( getProducts());
-
+const products = ref<Product[]>([]);
+getProducts().then((data) => {
+    products.value = data;
+});
 </script>
 
 <template>
