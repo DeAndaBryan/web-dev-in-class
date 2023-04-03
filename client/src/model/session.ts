@@ -10,7 +10,7 @@ const session = reactive({
     isLoading: false,
     messages: [] as {
         msg: string,
-        type: "success" | "error" | "warning" | "info",
+        type: "success" | "danger" | "warning" | "info",
     }[],
 })
 
@@ -30,10 +30,10 @@ export function api(url: string) {
     session.isLoading = true;
     return myFetch.api(url)
         .catch(err => {
-            console.error(err);
+            console.error({err});
             session.messages.push({
-                msg: err.message ?? JSON.stringify(err),
-                type: "error",
+                msg: err.message  ?? JSON.stringify(err),
+                type: "danger",
             })
         })
         .finally(() => {
@@ -56,4 +56,16 @@ export function useLogout() {
 
         router.push("/login");
     }
+}
+
+export function addMessage(msg: string, type: "success" | "danger" | "warning" | "info") {
+    console.log({msg, type});
+    session.messages.push({
+        msg,
+        type,
+    })
+}
+
+export function deleteMessage(index: number) {
+    session.messages.splice(index, 1);
 }
