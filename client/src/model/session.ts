@@ -26,9 +26,9 @@ export function useSession() {
     return session;
 }
 
-export function api(url: string) {
+export function api(url: string, data?: any, method?: string, headers?: any) {
     session.isLoading = true;
-    return myFetch.api(url)
+    return myFetch.api(url, data, method, headers)
         .catch(err => {
             console.error({err});
             session.messages.push({
