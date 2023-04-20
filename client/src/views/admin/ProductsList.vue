@@ -1,14 +1,26 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { getProducts, type Product } from '@/model/products'
+import GenModals from '@/components/GeneralModals.vue';
+import { confirm } from '@/model/generalModals'
 
 const products = ref<Product[]>([]);
 getProducts().then((data) => {
     products.value = data.data;
 });
+
+function deleteProduct(id: number) {
+    confirm('Are you sure you want to delete this?', 'Question', )
+    .then(() => {
+        console.log('delete: ' + id);
+    }).catch(() => {
+        console.log('didn\'t do it to: ' + id);
+    })
+}
 </script>
 
 <template>
+    <gen-modals></gen-modals>
     <div class="admin-products-list">
         <router-link to="/admin/products/edit" class="button is-primary admin-add-product">
             <div class="icon">
@@ -48,11 +60,11 @@ getProducts().then((data) => {
                                     <i class="fas fa-edit"></i>
                                 </div>
                             </router-link>
-                            <router-link :to="'/admin/products/delete/' + product.id" class="button" >
+                            <button class="button" @click="deleteProduct(product.id)" >
                                 <div class="icon">
                                     <i class="fas fa-trash"></i>
                                 </div>
-                            </router-link>
+                            </button>
                     </td>
                 </tr>
             </tbody>

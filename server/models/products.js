@@ -1,7 +1,17 @@
 const data = require('../data/products.json');
+const {connect, ObjectId} = require('./mongo');
 
-function getProducts() {
-  return data.products;
+const COLLECTION_NAME = 'products';
+
+async function collection() {
+    const db = await connect();
+    return db.collection(COLLECTION_NAME);
+}
+
+async function getProducts() {
+    const col = await collection();
+    const items = await col.find().toArray();
+    return items;
 }
 
 function getProductById(id) {
