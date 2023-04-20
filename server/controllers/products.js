@@ -4,7 +4,7 @@ const router = express.Router();
 
 router
     .get('/', (req, res, next) => {
-        model.getProducts()
+        model.getAll()
             .then(list => {
                 const data = { data: list, total: list.length, isSuccess: true };
                 res.send(data)
@@ -14,14 +14,14 @@ router
     .get('/search/:q', (req, res) => {
         const term = req.params.q;
         console.log({ term });
-        const list = model.searchProducts(term);
+        const list = model.search(term);
         const data = { data: list, total: list.length, isSuccess: true };
         res.send(data)
     })
 
     .get('/:id', (req, res) => {
         const id = +req.params.id;
-        const product = model.getProductById(id);
+        const product = model.getById(id);
         const data = { data: product, isSuccess: true };
         res.send(data)
     })
@@ -34,21 +34,21 @@ router
         console.log( req.params );
         console.log( req.headers );
 
-        model.addProduct(product);
+        model.add(product);
         const data = { data: product, isSuccess: true };
         res.send(data)
     })
 
     .patch('/:id', (req, res) => {
         const product = req.body;
-        model.updateProduct(product);
+        model.update(product);
         const data = { data: product, isSuccess: true };
         res.send(data)
     })
 
     .delete('/:id', (req, res) => {
         const id = +req.params.id;
-        model.deleteProduct(id);
+        model.deleteItem(id);
         const data = { data: id, isSuccess: true };
         res.send(data)
     })

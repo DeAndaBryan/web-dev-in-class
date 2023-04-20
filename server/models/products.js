@@ -8,32 +8,32 @@ async function collection() {
     return db.collection(COLLECTION_NAME);
 }
 
-async function getProducts() {
+async function getAll() {
     const col = await collection();
     const items = await col.find().toArray();
     return items;
 }
 
-function getProductById(id) {
-    return data.products.find(product => product.id === id);
+function getById(id) {
+    return data.item.find(product => product.id === id);
 }
 
-function addProduct(product) {
-    product.id = data.products.length + 1;
+function add(item) {
+    item.id = data.products.length + 1;
     data.products.push(product);
 }
 
-function updateProduct(product) {
+function update(item) {
     const index = data.products.findIndex(p => p.id === product.id);
     data.products[index] = product;
 }
 
-function deleteProduct(id) {
+function deleteItem(id) {
     const index = data.products.findIndex(p => p.id === id);
     data.products.splice(index, 1);
 }
 
-function searchProducts(searchTerm) {
+function search(searchTerm) {
     return data.products.filter(product => {
         return  product.title.toLowerCase().includes(searchTerm.toLowerCase())  ||
             product.description.toLowerCase().includes(searchTerm.toLowerCase())  ||
@@ -42,10 +42,10 @@ function searchProducts(searchTerm) {
 }
 
 module.exports = {
-    getProducts,
-    getProductById,
-    addProduct,
-    updateProduct,
-    deleteProduct,
-    searchProducts
+    getAll,
+    getById,
+    add,
+    update,
+    deleteItem,
+    search
 };
