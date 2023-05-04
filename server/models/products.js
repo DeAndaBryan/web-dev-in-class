@@ -8,37 +8,54 @@ async function collection() {
     return db.collection(COLLECTION_NAME);
 }
 
-async function getAll() {
+async function getAll(page = 1, pageSize = 30) {
     const col = await collection();
-    const items = await col.find().toArray();
-    return items;
+    const items = await col.find().skip((page - 1) * pageSize).limit(pageSize).toArray();
+    const total = await col.countDocuments();
+    return { items, total };
 }
 
-function getById(id) {
-    return data.item.find(product => product.id === id);
+async function getById(id) {
+    const col = await collection();
+    const item = await col.findOne({ _id: new ObjectId(id) });
+    return item;
 }
 
-function add(item) {
-    item.id = data.products.length + 1;
-    data.products.push(product);
+async function add(item) {
+    const col = await collection();
+    const result = await col.insertOne(item);
+    item._id = result.insertedId;
+    return item;
 }
 
-function update(item) {
-    const index = data.products.findIndex(p => p.id === product.id);
-    data.products[index] = product;
+async function update(item) {
+    const col = await collection();
+    const result = await col.findOneAndUpdate(
+        { _id: new ObjectId(item._id) },
+        { $set: item },
+        { returnDocument: 'after' });
+    return result.value;
 }
 
-function deleteItem(id) {
-    const index = data.products.findIndex(p => p.id === id);
-    data.products.splice(index, 1);
+async function deleteItem(id) {
+    const col = await collection();
+    const result = await col.deleteOne({ _id: new ObjectId(id) });
+    return result.deletedCount;
 }
 
-function search(searchTerm) {
-    return data.products.filter(product => {
-        return  product.title.toLowerCase().includes(searchTerm.toLowerCase())  ||
-            product.description.toLowerCase().includes(searchTerm.toLowerCase())  ||
-            product.brand.toLowerCase().includes(searchTerm.toLowerCase());
-    });
+async function search(searchTerm, page = 1, pageSize = 30) {
+    const col = await collection();
+    const query = { 
+        $or: [
+            { title: { $regex: searchTerm, $options: 'i' } },
+            { description: { $regex: searchTerm, $options: 'i' } },
+            { brand: { $regex: searchTerm, $options: 'i' } }
+        ]
+    };
+
+    const items = await col.find(query).skip((page -1) * pageSize).limit(pageSize).toArray();
+    const total = await col.countDocuments(query);
+    return { items, total};
 }
 
 module.exports = {

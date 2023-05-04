@@ -21,6 +21,7 @@ const router = createRouter({
     },
     { path: '/admin/products', name: 'admin-products', component: () => import('../views/admin/ProductsList.vue'), beforeEnter: secureRoute },
     { path: '/admin/products/edit/:id?', name: 'admin-products-edit', component: () => import('../views/admin/ProductEdit.vue'), beforeEnter: secureRoute },
+    { path: '/stoeLocations', name: 'store-locations', component: () => import('../views/StoreLocations.vue') },
   ]
 })
 
